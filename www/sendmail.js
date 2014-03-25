@@ -8,8 +8,8 @@ var sendmail = {
 			    [{
 			     	"subject":subject, 
 			       	"body":body,
-			       	"password":password,
-			       	"sender":sender, 
+			       	"sender":sender,
+			       	"password":password, 
 			       	"recipients":recipients
 			    }]
 			);
