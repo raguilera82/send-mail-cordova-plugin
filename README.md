@@ -1,4 +1,4 @@
 send-mail-cordova-plugin
 ========================
 
-This Cordova plugin allows to send email in Android platform without email composer
+This Cordova plugin allows to send an email using Android platform without email composer
