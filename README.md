@@ -57,3 +57,8 @@ Example calling from index.js
       }
     };
 </code>
+
+Tutorial in Spanish
+========================
+
+http://www.adictosaltrabajo.com/tutoriales/tutoriales.php?pagina=PluginAndroidPhoneGap
