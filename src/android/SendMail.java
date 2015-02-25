@@ -16,23 +16,25 @@ public class SendMail extends CordovaPlugin {
 		final CallbackContext callbackContext) throws JSONException {
 
 		if (ACTION_SEND.equals(action)) {
-			// Get the arguments.
-			JSONObject args = jsonArgs.getJSONObject(0);
-			final String subject = args.getString("subject");
-			final String body = args.getString("body");
-			final String sender = args.getString("sender");
-			final String password = args.getString("password");
-			final String recipients = args.getString("recipients");
-			if (args.has("attachment")) {
-				final String attachment = args.getString("attachment");
-			} else {
-				final String attachment = null;
-			}
+			// Get the json arguments as final for thread usage.
+			final JSONObject args = jsonArgs.getJSONObject(0);
 
 			// Run in a thread to not block the webcore thread.
 			cordova.getThreadPool().execute(new Runnable() {
 				// Thread method.
 				public void run() {
+					// Get the arguments.
+					String subject = args.getString("subject");
+					String body = args.getString("body");
+					String sender = args.getString("sender");
+					String password = args.getString("password");
+					String recipients = args.getString("recipients");
+					String attachment = null;
+					if (args.has("attachment")) {
+						attachment = args.getString("attachment");
+					}
+
+					// Try to send the the mail.
 					try {
 						// Create the sender
 						GMailSender gmailSender = new GMailSender(sender, password);
@@ -49,6 +51,7 @@ public class SendMail extends CordovaPlugin {
 					}
 				}
 			});
+
 			return true;
 		}
 
