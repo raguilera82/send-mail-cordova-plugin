@@ -28,7 +28,7 @@ public class SendMail extends CordovaPlugin {
 				GMailSender gmailSender = new GMailSender(
 						sender, password);
 
-				gmailSender.sendMail(subject, body, sender, recipients);
+				gmailSender.sendMail(subject, body, sender, recipients, attachment);
 
 			}
 			callbackContext.success();
