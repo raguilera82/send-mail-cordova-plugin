@@ -16,32 +16,30 @@ public class SendMail extends CordovaPlugin {
 		CallbackContext callbackContext) throws JSONException {
 
 		if (ACTION_SEND.equals(action)) {
-			// Run in a thread to alloz to display loading image for the application.
-			final long duration = args.getLong(0);
-			cordova.getActivity().runOnUiThread(new Runnable() {
+			// Get the arguments.
+			JSONObject args = jsonArgs.getJSONObject(0);
+			final String subject = args.getString("subject");
+			final String body = args.getString("body");
+			final String sender = args.getString("sender");
+			final String password = args.getString("password");
+			final String recipients = args.getString("recipients");
+			final String attachment = null;
+			if (args.has("attachment")) {
+				attachment = args.getString("attachment");
+			}
+
+			// Run in a thread to not block the webcore thread.
+			cordova.getThreadPool().execute(new Runnable() {
 				// Thread method.
 				public void run() {
 					try {
-						// Get the arguments.
-						JSONObject args = jsonArgs.getJSONObject(0);
-						String subject = args.getString("subject");
-						String body = args.getString("body");
-						String sender = args.getString("sender");
-						String password = args.getString("password");
-						String recipients = args.getString("recipients");
-						String attachment = null;
-						if (args.has("attachment")) {
-							attachment = args.getString("attachment");
-						}
-
 						// Create the sender
-						GMailSender gmailSender = new GMailSender(
-								sender, password);
+						GMailSender gmailSender = new GMailSender(sender, password);
 
-						// Send the mail (async).
+						// Send the mail.
 						gmailSender.sendMail(subject, body, sender, recipients, attachment);
 
-						// Thread safe.
+						// Thread safe callback.
 						callbackContext.success();
 					} catch (Exception e) {
 						// Catch error.
