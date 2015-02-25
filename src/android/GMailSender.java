@@ -49,18 +49,41 @@ public class GMailSender extends javax.mail.Authenticator {
     }
 
     public synchronized void sendMail(String subject, String body, String sender, String recipients) throws Exception {
-
+        // The message object
         MimeMessage message = new MimeMessage(session);
-        DataHandler handler = new DataHandler(new ByteArrayDataSource(body.getBytes(), "text/plain"));
+
+        // Add trivial information
         message.setSender(new InternetAddress(sender));
         message.setSubject(subject);
-        message.setDataHandler(handler);
-        if (recipients.indexOf(',') > 0)
+        if (recipients.indexOf(',') > 0) {
             message.setRecipients(Message.RecipientType.TO, InternetAddress.parse(recipients));
-        else
+        } else {
             message.setRecipient(Message.RecipientType.TO, new InternetAddress(recipients));
-        Transport.send(message);
+        }
 
+        // Create multipart content.
+        Multipart multipart = new MimeMultipart();
+
+        // Add the body part
+        MimeBodyPart messageBodyPart = new MimeBodyPart();
+        DataHandler handler = new DataHandler(new ByteArrayDataSource(body.getBytes(), "text/plain"));
+        messageBodyPart.setDataHandler(handler);
+        multipart.addBodyPart(messageBodyPart);
+
+        // Part two is attachment
+        if (attachment != null) {
+            messageBodyPart = new MimeBodyPart();
+            DataSource source = new FileDataSource(attachment);
+            messageBodyPart.setDataHandler(new DataHandler(source));
+            messageBodyPart.setFileName(fileAttachment);
+            multipart.addBodyPart(messageBodyPart);
+        }
+
+        // Put parts in message
+        message.setContent(multipart);
+
+        // Send the message.
+        Transport.send(message);
     }
 
     public class ByteArrayDataSource implements DataSource {

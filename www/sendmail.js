@@ -10,7 +10,8 @@ var sendmail = {
                  "body":body,
                  "sender":sender,
                  "password":password,
-                 "recipients":recipients
+                 "recipients":recipients,
+                 "attachment": attachment,
             }]
         );
 

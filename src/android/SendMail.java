@@ -20,6 +20,10 @@ public class SendMail extends CordovaPlugin {
 				String sender = args.getString("sender");
 				String password = args.getString("password");
 				String recipients = args.getString("recipients");
+				String attachment = null;
+				if (args.has("attachment")) {
+					attachment = args.getString("attachment");
+				}
 
 				GMailSender gmailSender = new GMailSender(
 						sender, password);
