@@ -36,7 +36,6 @@ public class SendMail extends CordovaPlugin {
 		} catch (Exception e) {
 			callbackContext.error(e.getMessage());
 			callbackContext.error(e.toString());
-			System.out.println(e.toString());
 			return false;
 		}
 	}
