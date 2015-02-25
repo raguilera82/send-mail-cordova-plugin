@@ -13,7 +13,7 @@ public class SendMail extends CordovaPlugin {
 	public boolean execute(
 		String action,
 		JSONArray jsonArgs,
-		CallbackContext callbackContext) throws JSONException {
+		final CallbackContext callbackContext) throws JSONException {
 
 		if (ACTION_SEND.equals(action)) {
 			// Get the arguments.
@@ -23,9 +23,10 @@ public class SendMail extends CordovaPlugin {
 			final String sender = args.getString("sender");
 			final String password = args.getString("password");
 			final String recipients = args.getString("recipients");
-			final String attachment = null;
 			if (args.has("attachment")) {
-				attachment = args.getString("attachment");
+				final String attachment = args.getString("attachment");
+			} else {
+				final String attachment = null;
 			}
 
 			// Run in a thread to not block the webcore thread.
