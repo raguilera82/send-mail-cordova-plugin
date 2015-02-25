@@ -1,6 +1,6 @@
 var sendmail = {
 
-    send: function(successCallback, errorCallback, subject, body, sender, password, recipients){
+    send: function(successCallback, errorCallback, subject, body, sender, password, recipients, attachment){
         cordova.exec(successCallback,
             errorCallback,
             "SendMail",
@@ -14,7 +14,6 @@ var sendmail = {
                  "attachment": attachment,
             }]
         );
-
     }
 }
 
