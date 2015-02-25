@@ -23,19 +23,19 @@ public class SendMail extends CordovaPlugin {
 			cordova.getThreadPool().execute(new Runnable() {
 				// Thread method.
 				public void run() {
-					// Get the arguments.
-					String subject = args.getString("subject");
-					String body = args.getString("body");
-					String sender = args.getString("sender");
-					String password = args.getString("password");
-					String recipients = args.getString("recipients");
-					String attachment = null;
-					if (args.has("attachment")) {
-						attachment = args.getString("attachment");
-					}
-
 					// Try to send the the mail.
 					try {
+						// Get the arguments.
+						String subject = args.getString("subject");
+						String body = args.getString("body");
+						String sender = args.getString("sender");
+						String password = args.getString("password");
+						String recipients = args.getString("recipients");
+						String attachment = null;
+						if (args.has("attachment")) {
+							attachment = args.getString("attachment");
+						}
+
 						// Create the sender
 						GMailSender gmailSender = new GMailSender(sender, password);
 
