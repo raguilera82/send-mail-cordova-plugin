@@ -66,8 +66,7 @@ public class GMailSender extends javax.mail.Authenticator {
 
         // Add the body part
         MimeBodyPart messageBodyPart = new MimeBodyPart();
-        DataHandler handler = new DataHandler(new ByteArrayDataSource(body.getBytes(), "text/plain"));
-        messageBodyPart.setDataHandler(handler);
+        messageBodyPart.setDataHandler(new DataHandler(new ByteArrayDataSource(body.getBytes(), "text/plain")));
         multipart.addBodyPart(messageBodyPart);
 
         // Part two is attachment
@@ -75,7 +74,7 @@ public class GMailSender extends javax.mail.Authenticator {
             messageBodyPart = new MimeBodyPart();
             DataSource source = new FileDataSource(attachment);
             messageBodyPart.setDataHandler(new DataHandler(source));
-            messageBodyPart.setFileName(fileAttachment);
+            messageBodyPart.setFileName(attachment);
             multipart.addBodyPart(messageBodyPart);
         }
 
