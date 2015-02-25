@@ -66,7 +66,7 @@ public class GMailSender extends javax.mail.Authenticator {
         }
 
         // Create multipart content.
-        Multipart multipart = new MimeMultipart();
+        Multipart multipart = new MimeMultipart("mixed");
 
         // Add the body part
         MimeBodyPart messageBodyPart = new MimeBodyPart();
