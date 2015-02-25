@@ -76,6 +76,8 @@ public class GMailSender extends javax.mail.Authenticator {
         // Part two is attachment
         if (attachment != null) {
             messageBodyPart = new MimeBodyPart();
+            System.out.println("attachment");
+            System.out.println(attachment);
             DataSource source = new FileDataSource(attachment);
             messageBodyPart.setDataHandler(new DataHandler(source));
             messageBodyPart.setFileName(attachment);
