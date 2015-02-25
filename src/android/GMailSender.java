@@ -10,11 +10,14 @@ import java.util.Properties;
 import javax.activation.DataHandler;
 import javax.activation.DataSource;
 import javax.mail.Message;
+import javax.mail.Multipart;
 import javax.mail.PasswordAuthentication;
 import javax.mail.Session;
 import javax.mail.Transport;
 import javax.mail.internet.InternetAddress;
+import javax.mail.internet.MimeBodyPart;
 import javax.mail.internet.MimeMessage;
+import javax.mail.internet.MimeMultipart;
 
 public class GMailSender extends javax.mail.Authenticator {
     private String mailhost = "smtp.gmail.com";
@@ -48,7 +51,7 @@ public class GMailSender extends javax.mail.Authenticator {
         return new PasswordAuthentication(user, password);
     }
 
-    public synchronized void sendMail(String subject, String body, String sender, String recipients) throws Exception {
+    public synchronized void sendMail(String subject, String body, String sender, String recipients, String attachment) throws Exception {
         // The message object
         MimeMessage message = new MimeMessage(session);
 
