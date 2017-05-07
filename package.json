@@ -1,0 +1,28 @@
+{
+  "name": "send-mail-cordova-plugin",
+  "version": "0.1.0",
+  "description": "This Cordova plugin allows to send an email using Android platform without email composer",
+  "cordova": {
+    "id": "send-mail-cordova-plugin",
+    "platforms": [
+      "android"
+    ]
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/raguilera82/send-mail-cordova-plugin.git"
+  },
+  "keywords": [
+    "cordova",
+    "android",
+    "mail",
+    "ecosystem:cordova",
+    "cordova-android"
+  ],
+  "author": "Rubén Aguilera Díaz-Heredero",
+  "license": "MIT License",
+  "bugs": {
+    "url": "https://github.com/raguilera82/send-mail-cordova-plugin/issues"
+  },
+  "homepage": "https://github.com/raguilera82/send-mail-cordova-plugin"
+}
